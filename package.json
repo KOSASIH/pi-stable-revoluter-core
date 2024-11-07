@@ -1,0 +1,63 @@
+{
+  "name": "pi-stable-revoluter-core",
+  "version": "1.0.0",
+  "description": "Core smart contracts for the Pi Stable Revoluter project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "hardhat test",
+    "test:unit": "hardhat test tests/unit",
+    "test:integration": "hardhat test tests/integration",
+    "lint": "eslint .",
+    "compile": "hardhat compile",
+    "deploy": "hardhat run scripts/deploy.js --network <network_name>",
+    "format": "prettier --write '**/*.{js,sol}'",
+    "clean": "hardhat clean",
+    "start": "node scripts/start.js"
+  },
+  "keywords": [
+    "ethereum",
+    "smart-contracts",
+    "stablecoin",
+    "decentralized-finance",
+    "defi"
+  ],
+  "author": "KOSASIH",
+  "license": "MIT",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.5.0",
+    "dotenv": "^10.0.0",
+    "ethers": "^5.4.0",
+    "hardhat": "^2.6.0",
+    "web3": "^1.5.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.4.1",
+    "hardhat-ethers": "^2.0.0",
+    "chai": "^4.3.4",
+    "mocha": "^9.1.3"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es2021": true,
+      "node": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:prettier/recommended"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 12
+    },
+    "rules": {
+      "prettier/prettier": "error"
+    }
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
+  }
+}
