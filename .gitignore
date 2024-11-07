@@ -1,2 +1,21 @@
-# Google App Engine generated folder
-appengine-generated/
+# Node.js
+node_modules/
+npm-debug.log
+package-lock.json
+
+# Truffle artifacts
+/build/
+*.json
+
+# Local blockchain files
+/.ganache/
+*.log
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment variables
+.env
