@@ -31,7 +31,7 @@ Authorization: Bearer YOUR_API_KEY
    4 }
    ```
 
-2. Transfer StableCoin
+### 2. Transfer StableCoin
 - **Endpoint**: /transfer
 - **Method**: POST
 - **Request Body**:
@@ -44,7 +44,35 @@ Authorization: Bearer YOUR_API_KEY
    ```
 
 - Response
-{
-  "transactionId": "0xabcdef1234567890",
-  "status": "success"
-}
+   ```json
+   1 {
+   2   "transactionId": "0xabcdef1234567890",
+   3   "status": "success"
+   4 }
+   ```
+
+### 3. Get Governance Proposals
+- **Endpoint**: /governance/proposals
+- **Method**: GET
+- **Response**:
+   ```json
+   1 [
+   2   {
+   3     "id": "1",
+   4     "title": "Increase Reserve Ratio",
+   5     "status": "active",
+   6     "votesFor": 1000,
+   7     "votesAgainst": 200
+   8   },
+   9   {
+   10     "id": "2",
+   11     "title": "Add New Asset to Reserves",
+   12     "status": "pending",
+   13     "votesFor": 500,
+   14     "votesAgainst": 300
+   15   }
+   16 ]
+   ```
+
+## Conclusion
+The PiStable API is designed to facilitate seamless integration with the PiStable ecosystem. For further details, please refer to the API documentation or contact the development team for support.
