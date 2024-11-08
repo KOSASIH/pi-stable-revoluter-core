@@ -84,3 +84,15 @@ To transfer tokens to another address:
 6 
 7 transferTokens("0xRecipientAddress", "50"); // Replace with recipient address
 ```
+
+## Listening for Events
+You can also listen for events emitted by your contracts. For example, if your StableCoin contract emits a Transfer event, you can listen for it like this:
+
+```javascript
+1 stableCoin.on("Transfer", (from, to, value) => {
+2     console.log(`Transfer event: ${value.toString()} STC from ${from} to ${to}`);
+3 });
+```
+
+# Conclusion
+You have successfully interacted with the deployed smart contracts for the pi-stable-revoluter-core project! For more advanced interactions, refer to the Contract Documentation for detailed information on the available functions and events in your contracts. If you have any questions or need further assistance, feel free to reach out to the community or check the project's GitHub issues.
