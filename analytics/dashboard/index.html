@@ -1,0 +1,30 @@
+<!-- analytics/dashboard/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain Analytics Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Blockchain Analytics Dashboard</h1>
+        </header>
+        <main>
+            <section id="analytics">
+                <h2>Analytics Overview</h2>
+                <div id="tokenBalance"></div>
+                <div id="latestPrice"></div>
+                <div id="transactionHistory"></div>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2023 Blockchain Analytics</p>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/ethers/dist/ethers.umd.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
