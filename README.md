@@ -1,3 +1,8 @@
+[![Chainlink Verified Oracle Network](https://img.shields.io/badge/Chainlink-Verified%20Oracle%20Network-3498DB?style=for-the-badge&logo=chainlink&logoColor=white)](https://chain.link/)
+[![Blockchain Badges](https://img.shields.io/badge/Blockchain%20Badges-Digital%20Credentials-4CAF50?style=for-the-badge)](https://www.blockchainbadges.com/)
+[![Accredible](https://img.shields.io/badge/Accredible-Digital%20Credentials-FF9800?style=for-the-badge)](https://www.accredible.com/)
+[![ISACA Badges](https://img.shields.io/badge/ISACA-Open%20Badges-0072C6?style=for-the-badge)](https://www.isaca.org/credentialing/credentialing-badges)
+
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/KOSASIH/pi-stable-revoluter-core">PiStable</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://www.linkedin.com/in/kosasih-81b46b5a">KOSASIH</a> is licensed under <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Creative Commons Attribution 4.0 International<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""></a></p>
 
 # pi-stable-revoluter-core
