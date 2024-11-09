@@ -18,7 +18,7 @@ The PiStable system is designed to create a stablecoin pegged to a specific valu
 
 [User Interface] <--> [Smart Contracts] <--> [Price Oracles] | | | | | | [Frontend] [StableCoin] [External Data] [ReserveManager] [Governance]
 
-
+![Architecture Diagram](pi-stable.jpeg).
 ## Security Considerations
 - **Auditing**: All smart contracts will undergo rigorous security audits to identify and mitigate vulnerabilities.
 - **Decentralization**: The system is designed to minimize single points of failure, ensuring that no single entity can control the stablecoin.
