@@ -1,0 +1,139 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/AccessControl.sol";
+import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+
+contract AdvancedPiStable is ERC20, AccessControl {
+    bytes32 public constant GOVERNANCE_ROLE = keccak256("GOVERNANCE_ROLE");
+    AggregatorV3Interface internal priceFeed;
+
+    uint256 public targetPrice = 314159 * (10 ** 3); // Target price in micro-dollars ($314.159)
+    uint256 public reserveBalance; // Total reserves for stability
+    uint256 public lastRebalanceTimestamp;
+    uint256 public rebalanceInterval = 1 days; // Default interval for rebalancing
+
+    mapping(address => uint256) public reserves; // User reserves for stability fund
+
+    struct Proposal {
+        uint256 id;
+        string description;
+        uint256 votesFor;
+        uint256 votesAgainst;
+        bool executed;
+        address proposer;
+    }
+
+    Proposal[] public proposals;
+    mapping(address => mapping(uint256 => bool)) public voted;
+
+    event PegAdjusted(uint256 newTargetPrice);
+    event Rebalance(uint256 newSupply, uint256 adjustedReserve);
+    event ProposalCreated(uint256 id, string description, address proposer);
+    event Voted(uint256 proposalId, bool inFavor, address voter);
+    event ProposalExecuted(uint256 proposalId);
+
+    constructor(address _priceFeed) ERC20("AdvancedPiStable", "APIS") {
+        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _setupRole(GOVERNANCE_ROLE, msg.sender);
+        priceFeed = AggregatorV3Interface(_priceFeed);
+        _mint(msg.sender, 1000000 * (10 ** decimals()));
+    }
+
+    modifier onlyGovernance() {
+        require(hasRole(GOVERNANCE_ROLE, msg.sender), "Caller is not part of governance");
+        _;
+    }
+
+    modifier onlyHolders() {
+        require(balanceOf(msg.sender) > 0, "Not a token holder");
+        _;
+    }
+
+    // Fetch the latest price of Pi Coin
+    function getCurrentPrice() public view returns (uint256) {
+        (, int256 price, , , ) = priceFeed.latestRoundData();
+        return uint256(price) * (10 ** 10); // Convert to wei for precision
+    }
+
+    // Rebalance the supply based on current market conditions
+    function rebalance() external onlyGovernance {
+        require(block.timestamp >= lastRebalanceTimestamp + rebalanceInterval, "Rebalance interval not met");
+
+        uint256 currentPrice = getCurrentPrice();
+        if (currentPrice > targetPrice) {
+            uint256 excessValue = currentPrice - targetPrice;
+            uint256 mintAmount = (excessValue * totalSupply()) / targetPrice;
+            _mint(address(this), mintAmount);
+            reserveBalance += excessValue; // Adjust reserves
+        } else {
+            uint256 deficitValue = targetPrice - currentPrice;
+            uint256 burnAmount = (deficitValue * totalSupply()) / targetPrice;
+            _burn(address(this), burnAmount);
+            reserveBalance -= deficitValue;
+        }
+
+        lastRebalanceTimestamp = block.timestamp;
+        emit Rebalance(totalSupply(), reserveBalance);
+    }
+
+    function adjustPeg(uint256 newTargetPrice) external onlyGovernance {
+        targetPrice = newTargetPrice;
+        emit PegAdjusted(newTargetPrice);
+    }
+
+    // Governance - Create a proposal
+    function createProposal(string memory description) external onlyHolders {
+        Proposal memory proposal = Proposal({
+            id: proposals.length,
+            description: description,
+            votesFor: 0,
+            votesAgainst: 0,
+            executed: false,
+            proposer: msg.sender
+        });
+        proposals.push(proposal);
+        emit ProposalCreated(proposal.id, description, msg.sender);
+    }
+
+    // Vote on a proposal
+    function voteOnProposal(uint256 proposalId, bool inFavor) external onlyHolders {
+        require(!voted[msg.sender][proposalId], "Already voted");
+        require(proposalId < proposals.length, "Proposal does not exist");
+
+        Proposal storage proposal = proposals[proposalId];
+        voted[msg.sender][proposalId] = true;
+
+        if (inFavor) {
+            proposal.votesFor += balanceOf(msg.sender);
+        } else {
+            proposal.votesAgainst += balanceOf(msg.sender);
+        }
+
+        emit Voted(proposalId, inFavor, msg.sender);
+    }
+
+    // Execute a successful proposal
+    function executeProposal(uint256 proposalId) external onlyGovernance {
+        Proposal storage proposal = proposals[proposalId];
+        require(!proposal.executed, "Proposal already executed");
+        require(proposal.votesFor > proposal.votesAgainst, "Proposal not approved");
+
+        // Add custom logic for proposal execution here
+        proposal.executed = true;
+        emit ProposalExecuted(proposalId);
+    }
+
+    // Advanced burning and minting functions for holders
+    function stableMint(uint256 amount) external onlyGovernance {
+        require(reserveBalance >= amount, "Not enough reserves");
+        _mint(msg.sender, amount);
+        reserveBalance -= amount;
+    }
+
+    function burn(uint256 amount) external {
+        _burn(msg.sender, amount);
+        reserves[msg.sender] += amount; // Track reserves
+    }
+}
