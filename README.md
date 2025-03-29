@@ -196,3 +196,24 @@ We welcome contributions! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) for
 
 # License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+<!-- Data Stream black badge -->
+<a href="https://chain.link/badge"> <img src="https://chain.link/badge-data-streams-black" alt="Data Streams secured with chainlink"></a>
+
+<!-- CCIP white badge -->
+<a href="https://chain.link/badge"> <img src="https://chain.link/badge-cross-chain-white" alt="CCIP secured with chainlink"></a>
+
+<!-- functions black badge -->
+<a href="https://chain.link/badge"> <img src="https://chain.link/badge-functions-black" alt="secured with chainlink"></a>
+
+<!-- proof of reserve white badge -->
+<a href="https://chain.link/badge"> <img src="https://chain.link/badge-proof-of-reserve-white" alt="proof of reserve secured with chainlink"></a>
+
+<!-- market data black badge -->
+<a href="https://chain.link/badge"> <img src="https://chain.link/badge-market-data-black" alt="market data secured with chainlink"></a>
+
+<!-- randomness white badge -->
+<a href="https://chain.link/badge"> <img src="https://chain.link/badge-randomness-white" alt="randomness secured with chainlink"></a>
+
+ <!-- automation black badge -->
+<a href="https://chain.link/badge"> <img src="https://chain.link/badge-automation-black" alt="automation secured with chainlink"></a>
